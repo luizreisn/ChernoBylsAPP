@@ -1,0 +1,48 @@
+.bemVindo{
+    position: absolute;
+    margin-top: 80px;
+    left: 120.44px;
+    font-weight: bold;
+    font-size: 10pt;
+    color:white;
+}
+
+.segment{
+    background-color: var(--ion-color-primary);
+    width: 260px;
+    margin: auto;
+    margin-top: 15px;
+    border-radius: 10px;
+}
+
+ion-slides {
+    top: 15px;
+
+    .slide{
+        width: auto;
+        color: white;
+        background-color: #7d2ea7ab;
+        border-radius: 10px;
+
+        ion-item{
+            --background: rgba(255, 255, 255, 0.226);
+            border-radius: 10px;
+            color: white;
+            ion-datetime{
+                --placeholder-color: white;
+                color: white;
+                
+            }
+        }
+    }
+}
+
+.textoDescricao{
+    position: absolute;
+    left: auto;
+    right: auto;
+    width: 80%;
+    text-align: center;
+    margin-top: 350px;
+    color: var(--ion-color-primary);
+}

@@ -9,5 +9,86 @@
 </ion-header>
 
 <ion-content>
+  <div class="segment">
+    <ion-segment value="login" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="login">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
 
+      <ion-segment-button value="cadastro">
+        <ion-label>Cadastro</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-slides class="swiper-no-swiping">
+    <ion-slide >
+      <div class="slide ion-padding">
+        <span>Login</span>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email" placeholder="E-Mail" [(ngModel)]="usuarioLogin.email"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="password" placeholder="Senha" [(ngModel)]="usuarioLogin.senha"></ion-input>
+        </ion-item>
+
+        <ion-button class="ion-margin-top" color="primary" expand="block" (click)="login()">
+          Entrar
+        </ion-button>
+      </div>
+
+      <div class="textoDescricao">
+        <span>
+          Trabalhamos com qualidade e rapidez a cada entrega.
+        </span>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide ion-padding">
+        <span>Cadastro</span>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="text" placeholder="Nome Completo" [(ngModel)]="usuarioCadastro.nome"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="tel" placeholder="Telefone" [(ngModel)]="usuarioCadastro.Telefone"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="number" placeholder="CPF" [(ngModel)]="usuarioCadastro.cpf"></ion-input>
+        </ion-item> 
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-label>Nascimento</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Data de Nacimento" [(ngModel)]="usuarioCadastro.nascimento"></ion-datetime>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-label>Sexo</ion-label>
+          <ion-select mode="ios" interface="action-sheet" style="padding-left: 0;" [(ngModel)]="usuarioCadastro.sexo">
+            <ion-select-option value="feminino">Feminino</ion-select-option>
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+            <ion-select-option value="naoDizer">Prefiro Não Dizer</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="email" placeholder="E-Mail" [(ngModel)]="usuarioCadastro.email"></ion-input>
+        </ion-item>
+
+        <ion-item class="ion-margin-top" lines="none">
+          <ion-input type="password" placeholder="Senha" [(ngModel)]="usuarioCadastro.senha"></ion-input>
+        </ion-item>
+
+        <ion-button class="ion-margin-top" color="primary" expand="block" (click)="cadastrar()">
+          Cadastrar
+        </ion-button>
+      </div>
+    </ion-slide>
+
+  </ion-slides>
 </ion-content>
