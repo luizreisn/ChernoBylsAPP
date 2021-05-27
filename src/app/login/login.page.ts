@@ -30,7 +30,6 @@ export class LoginPage {
 
   public async login(){
     await this.carregando();
-
     try{
       await this.authService.login(this.usuarioLogin);
     }catch(error){
@@ -44,6 +43,9 @@ export class LoginPage {
         break;
         case 'auth/invalid-email': 
         message = 'E-mail invalido!';
+        break;
+        case 'auth/wrong-password': 
+        message = 'Senha incorreta!';
         break;
       }
       console.error(error);
