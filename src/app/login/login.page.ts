@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { IonSlides, LoadingController, ToastController } from '@ionic/angular';
 import { Usuario } from '../interfaces/usuario';
 import { AuthService } from '../services/auth.service';
@@ -17,6 +18,7 @@ export class LoginPage {
   private loading: any;
 
   constructor(private authService: AuthService,
+              private afs: AngularFirestore,
               private loadingCtrl: LoadingController,
               private toastCtrl: ToastController) { }
 
@@ -58,7 +60,8 @@ export class LoginPage {
   public async cadastrar(){
     await this.carregando();
     try{
-      await this.authService.cadastrar(this.usuarioCadastro);
+      const novoUsuario = await this.authService.cadastrar(this.usuarioCadastro);
+      await this.afs.collection<Usuario>('Usuarios').doc(novoUsuario.user.uid).set(this.usuarioCadastro)
     } catch(error){
       let message: string;
       switch(error.code){
