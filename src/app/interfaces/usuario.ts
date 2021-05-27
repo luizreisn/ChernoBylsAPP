@@ -13,11 +13,9 @@ export interface Usuario {
         complemento?: string;
     };
     produtosFavoritos?: string[];
-    carrinho?: [
-        {
-            id?: string;
-            quantidade?: number;
-            valorTotal?: number;
-        }
-    ];
+    carrinho?:{
+        id?: string;
+        quantidade?: number;
+        valorTotal?: number;
+    }[];
 }
