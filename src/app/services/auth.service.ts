@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Usuario } from '../interfaces/usuario';
+import { switchMap } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Produto } from '../interfaces/produto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private afa: AngularFireAuth) { }
+  public userData = this.afa.user.pipe(switchMap(u => this.afs.doc<Usuario>('Usuarios/'+u.uid).valueChanges()));
+  
+  constructor(private afa: AngularFireAuth,
+              private afs: AngularFirestore) { }
 
   public login(usuario: Usuario) {
     return this.afa.signInWithEmailAndPassword(usuario.email, usuario.senha);
@@ -18,7 +24,7 @@ export class AuthService {
   }
 
   public sair() {
-
+    return this.afa.signOut();
   }
 
   public getAuth() {

@@ -1,27 +1,77 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.botaoMenu{
+  font-size: 50px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+.imgLogo{
+  width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+.botaoCarrinho{
+  width: auto;
+  height: auto;
+  ion-icon{
+    font-size: 50px;
+  }
 }
 
-#container a {
-  text-decoration: none;
+.cardEndereco{
+  padding-top: 3%;
+  margin-bottom: 0px;
+  ion-text{
+    text-decoration: underline;
+  }
+}
+
+.slideAvisos{
+  ion-col{
+    size: auto;
+    padding: 0px;
+  }
+  ion-slides{
+    width: 305px;
+  }
+}
+
+.botaoSlide{
+  height: 115px;
+  width: 343px;
+  img{
+    margin-top: 5px;
+    height: 100px;
+    width: auto;
+  }
+}
+
+.menuEspecifico{
+  height: 93px;
+  width: 93px;
+  img{
+    height: 65px;
+    width: auto;
+  }
+}
+
+.listaBusca{
+  ion-text{
+    font-size: larger;
+    font-weight: bold;
+  }
+}
+
+.itemsMenu{
+  --background: var(--ion-color-primary);
+  ion-item{
+    --background: var(--ion-color-primary);
+    --color: white;
+    ion-icon{
+      font-size: xxx-large;
+    }
+    ion-label{
+      font-size: large;
+    }
+  }
 }
