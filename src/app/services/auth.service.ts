@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Usuario } from '../interfaces/usuario';
 import { switchMap } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Produto } from '../interfaces/produto';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +10,12 @@ import { Produto } from '../interfaces/produto';
 export class AuthService {
 
   public userData = this.afa.user.pipe(switchMap(u => this.afs.doc<Usuario>('Usuarios/'+u.uid).valueChanges()));
+  public usuariosColecao: AngularFirestoreCollection<Usuario>;
   
   constructor(private afa: AngularFireAuth,
-              private afs: AngularFirestore) { }
+              private afs: AngularFirestore) { 
+    this.usuariosColecao = this.afs.collection<Usuario>('Usuarios');
+  }
 
   public login(usuario: Usuario) {
     return this.afa.signInWithEmailAndPassword(usuario.email, usuario.senha);
@@ -21,6 +23,14 @@ export class AuthService {
 
   public cadastrar(usuario: Usuario) {
     return this.afa.createUserWithEmailAndPassword(usuario.email, usuario.senha);
+  }
+
+  public atualizarUsuario(id: string, usuario: Usuario){
+    return this.usuariosColecao.doc<Usuario>(id).update(usuario);
+  }
+
+  public getUsuario(id: string){
+    return this.usuariosColecao.doc<Usuario>(id).valueChanges();
   }
 
   public sair() {

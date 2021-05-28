@@ -1,32 +1,28 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { Produto } from '../interfaces/produto';
+import { MenuEspecifico } from '../interfaces/menu-especifico';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutoService {
-  private colecaoProdutos: AngularFirestoreCollection<Produto>;
+export class MenusEspService {
+
+  private menusEsp: AngularFirestoreCollection<MenuEspecifico>;
 
   constructor(private afs: AngularFirestore) { 
-    this.colecaoProdutos = this.afs.collection<Produto>('Produtos');
+    this.menusEsp = this.afs.collection<MenuEspecifico>('MenusEsp');
   }
 
-  public getProdutos(){
-    return this.colecaoProdutos.snapshotChanges().pipe(
+  public getMenusEsp(){
+    return this.menusEsp.snapshotChanges().pipe(
       map(actions => {
-        return actions.map( a => {
+        return actions.map(a => {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
-          return {id, ...data};
+          return { id, ...data };
         })
       })
     )
   }
-
-  public getProduto(){
-
-  }
-
 }
