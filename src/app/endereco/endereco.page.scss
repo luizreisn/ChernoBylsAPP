@@ -1,0 +1,45 @@
+.botaoVoltar{
+    position: absolute;
+    font-size: 20px;
+}
+
+.imgLogo{
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.texto{
+    font-size: 20pt;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.trocaEndereco{
+    background-color: #7d2ea7ab;
+    ion-item{
+        border-radius: 10px;
+        margin: 10px;
+        color: white;
+        --background: rgba(255, 255, 255, 0.226);
+        ion-datetime{
+            --placeholder-color: white;
+            color: white;
+        }
+        ion-button{
+            margin: auto;
+            height: auto;
+            width: auto;
+            ion-icon{
+                color: white;
+                font-size: 80px;
+            }
+        }
+    }
+    .botaoConfirma{
+        margin: 10px;
+    }
+}
+

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button class="botaoVoltar" defaultHref="home"></ion-back-button>
+      <div class="imgLogo">
+        <img src="/assets/img/logo.png">
+      </div>
+    </ion-buttons>
+    <div class="ion-text-center texto">
+      <ion-text>Trocar Endereco</ion-text>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="trocaEndereco">
+    <ion-item lines='none'>
+      <ion-input type="number" placeholder="CEP" [(ngModel)]="usuario.cep"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="text" placeholder="Endereço" [(ngModel)]="usuario.endereco"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="number" placeholder="Numero" [(ngModel)]="usuario.numero"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-textarea placeholder="Complemento" [(ngModel)]="usuario.complemento"></ion-textarea>
+    </ion-item>
+
+    <ion-button class="botaoConfirma"expand="block" (click)="atualizarEndereco()">Confirmar Endereço</ion-button>
+  </ion-card>
+</ion-content>
