@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button class="botaoVoltar" defaultHref="home"></ion-back-button>
+      <div class="imgLogo">
+        <img src="/assets/img/logo.png">
+      </div>
+    </ion-buttons>
+    <div class="ion-text-center texto">
+      <ion-text>Perfil</ion-text>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary" class="atualizarDados">
+    <ion-item lines="none" color="primary">
+      <ion-button fill="clear">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="text" placeholder="Nome Completo" [(ngModel)]="usuario.nome"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="tel" placeholder="Telefone" [(ngModel)]="usuario.telefone"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input type="number" placeholder="CPF" [(ngModel)]="usuario.cpf"></ion-input>
+    </ion-item> 
+
+    <ion-item lines="none">
+      <ion-label>Nascimento</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Data de Nacimento" [(ngModel)]="usuario.nascimento"></ion-datetime>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>Sexo</ion-label>
+      <ion-select mode="ios" interface="action-sheet" style="padding-left: 0;" [(ngModel)]="usuario.sexo">
+        <ion-select-option value="feminino">Feminino</ion-select-option>
+        <ion-select-option value="masculino">Masculino</ion-select-option>
+        <ion-select-option value="naoDizer">Prefiro Não Dizer</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input disabled type="email" placeholder="E-Mail" [(ngModel)]="usuario.email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-input disabled type="password" placeholder="Senha" [(ngModel)]="usuario.senha"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" class="botaoAtualiza" (click)="atualizar()">Atualizar Dados</ion-button>
+  </ion-card>
+</ion-content>
+
