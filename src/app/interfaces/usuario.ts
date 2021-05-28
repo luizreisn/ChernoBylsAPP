@@ -6,12 +6,10 @@ export interface Usuario {
     sexo?: string;
     email?: string;
     senha?: string;
-    dadosEndereco?:{
-        cep?: number;
-        endereco?: string;
-        numero?: number;
-        complemento?: string;
-    };
+    cep?: number;
+    endereco?: string;
+    numero?: number;
+    complemento?: string;   
     produtosFavoritos?: string[];
     carrinho?:{
         id?: string;
