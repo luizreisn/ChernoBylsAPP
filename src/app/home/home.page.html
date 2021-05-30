@@ -32,7 +32,7 @@
     <ion-col>
       <ion-slides pager="true" [options]="slideOpts">
         <ion-slide *ngFor="let aviso of avisos">
-          <ion-card button [color]="aviso.cor" class="botaoSlide" [routerLink]="['/', aviso.id]">
+          <ion-card button [color]="aviso.cor" class="botaoSlide" [routerLink]="['/menus', aviso.id]">
             <img [src]="aviso.img">
           </ion-card>
         </ion-slide>
@@ -62,7 +62,7 @@
 <ng-template #focarPesquisa>
   <ion-content>
     <ion-list >
-      <ion-item lines="full" [routerLink]="[]" *ngFor="let produto of produtosFiltrados">
+      <ion-item lines="full" [routerLink]="['/produto', produto.id]" *ngFor="let produto of produtosFiltrados">
         <ion-label color="primary" class="listaBusca">
           <ion-text>{{produto.nome}}</ion-text>
           <h3>{{produto.valor | currency: 'BRL'}}</h3>

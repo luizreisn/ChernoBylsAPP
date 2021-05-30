@@ -29,12 +29,8 @@ export class AuthService {
     return this.usuariosColecao.doc<Usuario>(id).update(usuario);
   }
 
-  public atualizarFavorito(id: string, usuario: Usuario){
-    return this.usuariosColecao.doc<Usuario>(id).update({produtosFavoritos: usuario.produtosFavoritos})
-  }
-
-  public atualizarCarrinho(id: string, usuario: Usuario){
-    return this.usuariosColecao.doc<Usuario>(id).update({carrinho: usuario.carrinho})
+  public atualizarFavorito(id: string, produtosFav: string[]){
+    return this.usuariosColecao.doc<Usuario>(id).update({produtosFavoritos: produtosFav})
   }
 
   public getUsuario(id: string){

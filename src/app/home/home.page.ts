@@ -48,18 +48,6 @@ export class HomePage {
               private botoesMenuService: BotoesMenuService,
               private menusEspService: MenusEspService,
               private alertCtrl: AlertController) { 
-    this.produtosSubscription = produtoService.getProdutos().subscribe(data =>{
-      this.produtos = data;
-    });
-    this.botoesMenuSubscription = botoesMenuService.getBotoesMenu().subscribe(data => {
-      this.botoesMenu = data;
-    });
-    this.menuEspSubscription = menusEspService.getMenusEsp().subscribe(data => {
-      this.menusEsp = data;
-    });     
-    this.avisosSubscription = botoesMenuService.getAvisos().subscribe(data => {
-      this.avisos = data;
-    });
     this.carregarDados();
   }
 
@@ -67,7 +55,21 @@ export class HomePage {
     this.usuarioId = (await this.authService.getAuth().currentUser).uid
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
-    })
+      this.usuario.endereco = data.endereco;
+      this.usuario.numero = data.numero;
+    });
+    this.produtosSubscription = this.produtoService.getProdutos().subscribe(data =>{
+      this.produtos = data;
+    });
+    this.botoesMenuSubscription = this.botoesMenuService.getBotoesMenu().subscribe(data => {
+      this.botoesMenu = data;
+    });
+    this.menuEspSubscription = this.menusEspService.getMenusEsp().subscribe(data => {
+      this.menusEsp = data;
+    });     
+    this.avisosSubscription = this.botoesMenuService.getAvisos().subscribe(data => {
+      this.avisos = data;
+    });
   }
 
   ngOnDestroy(){

@@ -60,6 +60,7 @@ export class LoginPage {
   public async cadastrar(){
     await this.carregando();
     try{
+      this.usuarioCadastro.produtosFavoritos = [];
       const novoUsuario = await this.authService.cadastrar(this.usuarioCadastro);
       await this.afs.collection<Usuario>('Usuarios').doc(novoUsuario.user.uid).set(this.usuarioCadastro)
     } catch(error){

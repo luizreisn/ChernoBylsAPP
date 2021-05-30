@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { MenuEspecifico } from '../interfaces/menu-especifico';
 import { Produto } from '../interfaces/produto';
@@ -14,6 +15,8 @@ import { ProdutoService } from '../services/produto.service';
   styleUrls: ['./menus.page.scss'],
 })
 export class MenusPage {
+
+  public produtosFavoritos: string[];
 
   public menuEsp: MenuEspecifico = {};
   public menuEspId: string = null;
@@ -30,7 +33,8 @@ export class MenusPage {
   constructor(private menusEspService: MenusEspService,
               private produtoService: ProdutoService,
               private authService: AuthService,
-              private activeRoute: ActivatedRoute) { 
+              private activeRoute: ActivatedRoute,
+              private toastCtrl: ToastController) { 
     this.carregarDados();
   }
 
@@ -45,6 +49,7 @@ export class MenusPage {
     this.usuarioId = (await this.authService.getAuth().currentUser).uid 
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
+      this.produtosFavoritos = this.usuario.produtosFavoritos;
     });
   }
 
@@ -54,22 +59,29 @@ export class MenusPage {
     this.usuarioSubscription.unsubscribe();
   }
 
-  public favoritar(id: string){
-    if(this.usuario.produtosFavoritos.find(p => p === id)){
-      const index = this.usuario.produtosFavoritos.findIndex(p => p === id);
-      this.usuario.produtosFavoritos.splice(index, 1);
-      console.log('Tirando fav')
-      console.log(this.usuario)
-      this.authService.atualizarFavorito(this.usuarioId, this.usuario)
-    }else{
-      this.usuario.produtosFavoritos.push(id);
-      this.authService.atualizarFavorito(this.usuarioId, this.usuario)
-    }
-  }
-
   public filtrarProdutos(categoria: string){
     this.produtosFiltrados = this.produtos.filter(p => p.categoria === categoria);
     return this.produtosFiltrados;
+  }
+
+  public darFavorito(id: string){
+    if(this.produtosFavoritos.find(p => p === id)){
+      const index = this.produtosFavoritos.findIndex(p => p === id)
+      this.produtosFavoritos.splice(index, 1)
+      console.log(this.produtosFavoritos)
+      this.authService.atualizarFavorito(this.usuarioId, this.produtosFavoritos)
+      this.toast('Produto retirado da lista de favoritos.')
+    }else{
+      this.produtosFavoritos.push(id)
+      console.log(this.produtosFavoritos)
+      this.authService.atualizarFavorito(this.usuarioId, this.produtosFavoritos)
+      this.toast('Produto colocado na lista de favoritos.')
+    }
+  }
+
+  async toast(message: string){
+    const toast = await this.toastCtrl.create({ message, duration: 2000, color: 'primary'});
+    toast.present();
   }
 
 }

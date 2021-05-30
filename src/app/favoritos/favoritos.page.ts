@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Produto } from '../interfaces/produto';
 import { Usuario } from '../interfaces/usuario';
@@ -12,6 +13,8 @@ import { ProdutoService } from '../services/produto.service';
 })
 export class FavoritosPage {
 
+  public produtosFavoritos: string[];
+
   public usuario: Usuario = {};
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
@@ -21,7 +24,8 @@ export class FavoritosPage {
   private produtosSubscription: Subscription;
 
   constructor(private authService: AuthService,
-              private produtosService: ProdutoService) { 
+              private produtosService: ProdutoService,
+              private toastCtrl: ToastController) { 
     this.carregarUsuarios();
   }
 
@@ -29,6 +33,7 @@ export class FavoritosPage {
     this.usuarioId = (await this.authService.getAuth().currentUser).uid 
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
+      this.produtosFavoritos = this.usuario.produtosFavoritos;
     });
     this.produtosSubscription = this.produtosService.getProdutos().subscribe(data =>{
       this.produtos = data;
@@ -45,15 +50,24 @@ export class FavoritosPage {
     return p;
   }
 
-  public favoritar(produto: Produto){
-    if(this.usuario.produtosFavoritos.find(p => p === produto.id)){
-      const index = this.usuario.produtosFavoritos.findIndex(p => p === produto.id);
-      this.usuario.produtosFavoritos.splice(index, 1);
-      this.authService.atualizarFavorito(this.usuarioId, this.usuario)
+  public darFavorito(id: string){
+    if(this.produtosFavoritos.find(p => p === id)){
+      const index = this.produtosFavoritos.findIndex(p => p === id)
+      this.produtosFavoritos.splice(index, 1)
+      console.log(this.produtosFavoritos)
+      this.authService.atualizarFavorito(this.usuarioId, this.produtosFavoritos)
+      this.toast('Produto retirado da lista de favoritos.')
     }else{
-      this.usuario.produtosFavoritos.push(produto.id);
-      this.authService.atualizarFavorito(this.usuarioId, this.usuario)
+      this.produtosFavoritos.push(id)
+      console.log(this.produtosFavoritos)
+      this.authService.atualizarFavorito(this.usuarioId, this.produtosFavoritos)
+      this.toast('Produto colocado na lista de favoritos.')
     }
+  }
+
+  async toast(message: string){
+    const toast = await this.toastCtrl.create({ message, duration: 2000, color: 'primary'});
+    toast.present();
   }
 
 }

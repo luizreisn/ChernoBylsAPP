@@ -5,19 +5,10 @@ export interface Usuario {
     nascimento?: Date;
     sexo?: string;
     email?: string;
-    senha?: string;
+    senha?: string;        
     cep?: number;
     endereco?: string;
     numero?: number;  
     complemento?: string;   
     produtosFavoritos?: string[];
-    carrinho?:{
-        id?: string;
-        quantidade?: number;
-        valorTotal?: number;
-        personalizacao?:{
-            nome?: string;
-            marcado?: boolean;
-        }[];
-    }[];
 }

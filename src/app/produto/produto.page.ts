@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { Produto } from '../interfaces/produto';
 import { Usuario } from '../interfaces/usuario';
@@ -13,6 +13,8 @@ import { ProdutoService } from '../services/produto.service';
   styleUrls: ['./produto.page.scss'],
 })
 export class ProdutoPage{
+
+  public produtosFavoritos: string[];
 
   public quantidade: number = 0;
 
@@ -29,7 +31,8 @@ export class ProdutoPage{
   constructor(private produtoService: ProdutoService,
               private authService: AuthService,
               private activeRoute: ActivatedRoute,
-              private navCtrl: NavController) { 
+              private navCtrl: NavController,
+              private toastCtrl: ToastController) { 
     this.carregarDados();
   }
 
@@ -41,6 +44,7 @@ export class ProdutoPage{
     this.usuarioId = (await this.authService.getAuth().currentUser).uid 
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
+      this.produtosFavoritos = this.usuario.produtosFavoritos
     });
     this.resetarProduto();
   }
@@ -50,14 +54,18 @@ export class ProdutoPage{
     this.produtoSubscription.unsubscribe();
   }
 
-  public favoritar(produto: Produto){
-    if(this.usuario.produtosFavoritos.find(p => p === produto.id)){
-      const index = this.usuario.produtosFavoritos.findIndex(p => p === produto.id);
-      this.usuario.produtosFavoritos.slice(index, 1);
-      this.authService.atualizarFavorito(this.usuarioId, this.usuario)
+  public darFavorito(id: string){
+    if(this.produtosFavoritos.find(p => p === id)){
+      const index = this.produtosFavoritos.findIndex(p => p === id)
+      this.produtosFavoritos.splice(index, 1)
+      console.log(this.produtosFavoritos)
+      this.authService.atualizarFavorito(this.usuarioId, this.produtosFavoritos)
+      this.toast('Produto retirado da lista de favoritos.')
     }else{
-      this.usuario.produtosFavoritos.push(produto.id);
-      this.authService.atualizarFavorito(this.usuarioId, this.usuario)
+      this.produtosFavoritos.push(id)
+      console.log(this.produtosFavoritos)
+      this.authService.atualizarFavorito(this.usuarioId, this.produtosFavoritos)
+      this.toast('Produto colocado na lista de favoritos.')
     }
   }
 
@@ -90,6 +98,11 @@ export class ProdutoPage{
     this.quantidade = 0;
     this.atualizarValor();
     console.log(this.produto.condimentos);
+  }
+
+  async toast(message: string){
+    const toast = await this.toastCtrl.create({ message, duration: 2000, color: 'primary'});
+    toast.present();
   }
 
 }

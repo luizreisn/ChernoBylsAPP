@@ -44,10 +44,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
   },
-  {
-    path: 'carrinho',
-    loadChildren: () => import('./carrinho/carrinho.module').then( m => m.CarrinhoPageModule)
-  },
   
 ];
 
