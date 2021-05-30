@@ -31,6 +31,10 @@ export class PerfilPage {
     })
   }
 
+  ngOnDestroy(){
+    this.usuarioSubscription.unsubscribe();
+  }
+
   private async atualizarUsuario(){  
     await this.carregando();
     try{

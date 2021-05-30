@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button defaultHref="home" class="botaoVoltar"></ion-back-button>
+      <div class="imgLogo">
+        <img src="/assets/img/logo.png">
+      </div>
+      <ion-button slot="end" class="botaoCarrinho" [routerLink]="[]">
+        <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>{{produto.nome}}</h1>
+
+  <ion-card class="cardImg" color="success">
+    <ion-img class="imgProduto" [src]="produto.imagem" ></ion-img>>
+  </ion-card>
+
+  <ion-row class="ion-margin ion-align-items-center">
+    <ion-col size="8">
+      <p>{{produto.descricao}}</p>
+    </ion-col>
+    <ion-col size="4">
+      <ion-row>
+        <h2>{{produto.valor | currency: 'BRL'}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-button class="botaoFavorito" fill="clear" (click)="favoritar(produto)" [color]="usuario.produtosFavoritos.includes(produto.id) ? 'danger' : 'primary'">
+          <ion-icon slot="icon-only" [name]="usuario.produtosFavoritos.includes(produto.id)? 'heart' : 'heart-outline'"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <h1>Personalize o Produto</h1>
+
+  <ion-list *ngFor="let condimento of produto.condimentos">
+    <ion-item>
+      <ion-label color="primary">{{condimento.nome}}</ion-label>
+      <ion-checkbox slot="start" [(ngModel)]="condimento.marcado"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <ion-row class="botoesFinais">
+    <ion-col size="6">
+      <ion-button fill="outline" (click)="retirar()">
+        <ion-icon name="remove-outline"></ion-icon>
+      </ion-button>
+      <ion-button [disabled]=true style="opacity: 100%;">{{quantidade}}</ion-button>
+      <ion-button fill="outline" (click)="adicionar()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-col> 
+    <ion-col size="6">
+      <ion-button [disabled]="quantidade <= 0" expand="block" (click)="adicionarProd()">Adicionar {{valorTotal | currency: 'BRL'}}</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-content>
+

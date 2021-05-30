@@ -4,12 +4,6 @@ export interface BotoesMenu {
     icon?: string;
 }[]
 
-export interface BotoesMenuEsp{
-    id?: string;
-    nome?: string;
-    img?: string;
-}[]
-
 export interface Avisos{
     id?: string;
     nome?: string;

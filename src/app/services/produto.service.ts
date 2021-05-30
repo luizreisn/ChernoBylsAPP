@@ -25,8 +25,8 @@ export class ProdutoService {
     )
   }
 
-  public getProduto(){
-
+  public getProduto(id: string){
+    return this.colecaoProdutos.doc<Produto>(id).valueChanges();
   }
 
 }

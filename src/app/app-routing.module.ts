@@ -30,14 +30,23 @@ const routes: Routes = [
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   },
   {
-    path: 'menus',
+    path: 'menus/:id',
     canActivate: [AuthGuard],
     loadChildren: () => import('./menus/menus.module').then( m => m.MenusPageModule)
   },
   {
-    path: 'menus/:id',
+    path: 'produto/:id',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./menus/menus.module').then( m => m.MenusPageModule)
+    loadChildren: () => import('./produto/produto.module').then( m => m.ProdutoPageModule)
+  },
+  {
+    path: 'favoritos',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  },
+  {
+    path: 'carrinho',
+    loadChildren: () => import('./carrinho/carrinho.module').then( m => m.CarrinhoPageModule)
   },
   
 ];

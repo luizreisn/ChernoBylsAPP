@@ -46,13 +46,13 @@
   </ion-row>
 
   <ion-row>
-    <ion-col size="4" *ngFor="let botaoMenuEsp of botoesMenuEsp">
+    <ion-col size="4" *ngFor="let menuEsp of menusEsp">
       <ion-row class="ion-justify-content-center">
-        <ion-button color="success" class="menuEspecifico" [routerLink]="['/menus', botaoMenuEsp.id]">
-          <img [src]="botaoMenuEsp.img">
+        <ion-button color="success" class="menuEspecifico" [routerLink]="['/menus', menuEsp.id]">
+          <img [src]="menuEsp.img">
         </ion-button>
         <div class="ion-text-center">
-          <ion-text color="primary">{{botaoMenuEsp.nome}}</ion-text>
+          <ion-text color="primary">{{menuEsp.nome}}</ion-text>
         </div>
       </ion-row>
     </ion-col>

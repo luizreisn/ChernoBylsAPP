@@ -8,14 +8,14 @@ import { MenuEspecifico } from '../interfaces/menu-especifico';
 })
 export class MenusEspService {
 
-  private menusEsp: AngularFirestoreCollection<MenuEspecifico>;
+  private menusEspColecao: AngularFirestoreCollection<MenuEspecifico>;
 
   constructor(private afs: AngularFirestore) { 
-    this.menusEsp = this.afs.collection<MenuEspecifico>('MenusEsp');
+    this.menusEspColecao = this.afs.collection<MenuEspecifico>('MenusEsp');
   }
 
   public getMenusEsp(){
-    return this.menusEsp.snapshotChanges().pipe(
+    return this.menusEspColecao.snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data();
@@ -24,5 +24,9 @@ export class MenusEspService {
         })
       })
     )
+  }
+
+  public getMenuEsp(id: string){
+    return this.menusEspColecao.doc<MenuEspecifico>(id).valueChanges();
   }
 }

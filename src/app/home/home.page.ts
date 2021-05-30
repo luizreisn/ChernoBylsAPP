@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { AlertController, IonSlides } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Avisos, BotoesMenu, BotoesMenuEsp } from '../interfaces/botoes-menu';
+import { Avisos, BotoesMenu } from '../interfaces/botoes-menu';
+import { MenuEspecifico } from '../interfaces/menu-especifico';
 import { Produto } from '../interfaces/produto';
 import { Usuario } from '../interfaces/usuario';
 import { AuthService } from '../services/auth.service';
 import { BotoesMenuService } from '../services/botoes-menu.service';
+import { MenusEspService } from '../services/menus-esp.service';
 import { ProdutoService } from '../services/produto.service';
 
 @Component({
@@ -26,8 +28,8 @@ export class HomePage {
   public botoesMenu = new Array<BotoesMenu>();
   private botoesMenuSubscription: Subscription;
 
-  public botoesMenuEsp = new Array<BotoesMenuEsp>();
-  private botoesMenuEspSubscription: Subscription;
+  public menusEsp = new Array<MenuEspecifico>();
+  private menuEspSubscription: Subscription;
 
   public avisos = new Array<Avisos>();
   private avisosSubscription: Subscription;
@@ -44,6 +46,7 @@ export class HomePage {
   constructor(private authService: AuthService,
               private produtoService: ProdutoService,
               private botoesMenuService: BotoesMenuService,
+              private menusEspService: MenusEspService,
               private alertCtrl: AlertController) { 
     this.produtosSubscription = produtoService.getProdutos().subscribe(data =>{
       this.produtos = data;
@@ -51,8 +54,8 @@ export class HomePage {
     this.botoesMenuSubscription = botoesMenuService.getBotoesMenu().subscribe(data => {
       this.botoesMenu = data;
     });
-    this.botoesMenuEspSubscription = botoesMenuService.getBotoesMenuEsp().subscribe(data => {
-      this.botoesMenuEsp = data;
+    this.menuEspSubscription = menusEspService.getMenusEsp().subscribe(data => {
+      this.menusEsp = data;
     });     
     this.avisosSubscription = botoesMenuService.getAvisos().subscribe(data => {
       this.avisos = data;
@@ -70,7 +73,7 @@ export class HomePage {
   ngOnDestroy(){
     this.produtosSubscription.unsubscribe();
     this.botoesMenuSubscription.unsubscribe();
-    this.botoesMenuEspSubscription.unsubscribe();
+    this.menuEspSubscription.unsubscribe();
     this.avisosSubscription.unsubscribe();
   }
 

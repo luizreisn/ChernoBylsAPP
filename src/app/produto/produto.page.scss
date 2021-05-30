@@ -1,0 +1,61 @@
+.botaoVoltar{
+    position: absolute;
+    font-size: 20px;
+  }
+    
+  .imgLogo{
+    width: 100px;
+    margin-left: 35%;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+      
+  .botaoCarrinho{
+    width: auto;
+    height: auto;
+    ion-icon{
+      font-size: 50px;
+    }
+  }
+
+  h1{
+    color: var(--ion-color-primary);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .cardImg{
+      height: 150px;
+  }
+
+  .botaoFavorito{
+    width: 90px;
+    margin-bottom: 0px;
+  }
+
+  p{
+      color: var(--ion-color-primary);
+  }
+
+  h2{
+      color: var(--ion-color-primary);
+      font-weight: bold;
+  }
+
+  .imgProduto{
+      margin-top: 5px;
+      height: 140px;
+      width: auto;
+  }
+
+  .botoesFinais{
+      margin-top: 15px;
+      margin-bottom: 15px;
+      margin-right: 10px;
+      margin-left: 10px;
+      ion-col{
+          padding: 0px;
+      }
+  }

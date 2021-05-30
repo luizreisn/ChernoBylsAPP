@@ -8,12 +8,16 @@ export interface Usuario {
     senha?: string;
     cep?: number;
     endereco?: string;
-    numero?: number;
+    numero?: number;  
     complemento?: string;   
     produtosFavoritos?: string[];
     carrinho?:{
         id?: string;
         quantidade?: number;
         valorTotal?: number;
+        personalizacao?:{
+            nome?: string;
+            marcado?: boolean;
+        }[];
     }[];
 }
