@@ -44,6 +44,21 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
   },
+  {
+    path: 'carrinho',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./carrinho/carrinho.module').then( m => m.CarrinhoPageModule)
+  },
+  {
+    path: 'pedidos-anteriores',    
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pedidos-anteriores/pedidos-anteriores.module').then( m => m.PedidosAnterioresPageModule)
+  },
+  {
+    path: 'pedidos/:id',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pedidos/pedidos.module').then( m => m.PedidosPageModule)
+  },
   
 ];
 

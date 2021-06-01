@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons>
+      <ion-back-button class="botaoVoltar" defaultHref="home"></ion-back-button>
+      <div class="imgLogo">
+        <img src="/assets/img/logo.png">
+      </div>
+    </ion-buttons>
+    <div class="ion-text-center texto">
+      <ion-text>Pedidos Anteriores</ion-text>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card color="primary" class="ion-text-center quantidadePedidos">
+    <ion-text>Existem {{quantidadePedidos}} pedidos realizados</ion-text>
+  </ion-card>
+
+  <div *ngIf="quantidadePedidos > 0; else semPedidos">
+    <ion-list *ngFor="let pedido of usuario.pedido">
+      <ion-item [routerLink]="['/pedidos', pedido.id]">
+        <ion-row class="ion-align-items-center">
+          <ion-col >
+            <ion-row>
+              <h1 class="pedidoId">#{{pedido.id}}</h1>
+            </ion-row>
+            <ion-row>
+              <h3 class="pedidoData">{{pedido.data.toMillis() | date: 'dd/MM/yy'}} <br> {{pedido.data.toMillis() | date: 'h:mm a'}}</h3>
+            </ion-row>
+          </ion-col>
+          <ion-col ></ion-col>
+          <ion-col>
+            <h1 class="pedidoTotal">{{pedido.total | currency: 'BRL'}}</h1>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>
+
+<ng-template #semPedidos>
+  <ion-text color="medium" class="ion-text-center">
+    <h1>
+      <ion-icon slot="start" name="sad-outline" style="font-size: 2em;"></ion-icon>
+    </h1>
+    <p style="margin: 15px">Você ainda não realizou nenhum pedido.</p>
+  </ion-text>
+</ng-template>

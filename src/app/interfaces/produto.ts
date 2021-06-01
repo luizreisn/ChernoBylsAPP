@@ -9,4 +9,6 @@ export interface Produto {
         nome?: string;
         marcado?: boolean;
     }[];
+    quantidade?: number;
+    valorTotal?: number;
 }

@@ -17,15 +17,21 @@
     padding-bottom: 10px;
 }
 
-.quantidadeProdutos{
-  padding: 2%;
-  ion-text{
-    font-size: 15pt;
+.produtoId{
+    color: var(--ion-color-primary);
     font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
   }
-}
 
-ion-item{
+  .realizado{
+    color: var(--ion-color-primary);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  ion-item{
     ion-row{
       margin-bottom: 3px;
       margin-top: 3px;
@@ -60,12 +66,19 @@ ion-item{
         margin-top: 0px;
       }
     }
-    .botaoFavorito{
-      width: 64px;
-      margin-bottom: 0px;
-    }
-    .botaoVer{
-      width: 64px;
-      margin-bottom: 0px;
-    }
   }
+
+  .valores{
+    color: var(--ion-color-primary);
+    text-align: right;
+    font-weight: bold;
+    margin: 5px;
+    margin-right: 16px;
+  }
+  .subtotal{
+    margin-top: 16px;
+  }
+  .total{
+    margin-bottom: 16px;
+  }
+  

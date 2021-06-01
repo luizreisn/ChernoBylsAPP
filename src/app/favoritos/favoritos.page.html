@@ -13,7 +13,11 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="usuario.produtosFavoritos; else favoritosVazio">
+  <ion-card color="primary" class="ion-text-center quantidadeProdutos">
+    <ion-text>Existem {{quantidadeFavoritos}} produtos na sua lista de Favoritos</ion-text>
+  </ion-card>
+
+  <div *ngIf="quantidadeFavoritos > 0; else favoritosVazio">
     <ion-list *ngFor="let produto of filtrarFavoritos()">
       <ion-item lines="full">
         <ion-row>
@@ -31,8 +35,8 @@
               <p>{{produto.valor | currency:'BRL'}}</p>
             </ion-row>
             <ion-row>
-              <ion-button class="botaoFavorito" fill="clear" size="small" (click)="darFavorito(produto.id)" [color]="produtosFavoritos.includes(produto.id)? 'danger':'primary'">
-                <ion-icon slot="icon-only" [name]="produtosFavoritos.includes(produto.id)? 'heart':'heart-outline'"></ion-icon>
+              <ion-button class="botaoFavorito" fill="clear" size="small" (click)="darFavorito(produto.id)" color="primary">
+                <ion-icon slot="icon-only" name="heart"></ion-icon>
               </ion-button>
             </ion-row>
             <ion-row>

@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Usuario } from '../interfaces/usuario';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Produto } from '../interfaces/produto';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,14 @@ export class AuthService {
 
   public atualizarFavorito(id: string, produtosFav: string[]){
     return this.usuariosColecao.doc<Usuario>(id).update({produtosFavoritos: produtosFav})
+  }
+
+  public atualizarCarrinho(id: string, produto: Produto[]){
+    return this.usuariosColecao.doc<Usuario>(id).update({carrinho: produto})
+  }
+
+  public atualizarPedidos(id: string, usuario: Usuario){
+    return this.usuariosColecao.doc<Usuario>(id).update({pedido: usuario.pedido})
   }
 
   public getUsuario(id: string){

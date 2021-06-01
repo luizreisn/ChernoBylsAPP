@@ -79,6 +79,14 @@ export class MenusPage {
     }
   }
 
+  public design(id: string){
+    if(this.usuario.produtosFavoritos.find(p => p === id)){
+      return true
+    }else{
+      return false
+    }
+  }
+
   async toast(message: string){
     const toast = await this.toastCtrl.create({ message, duration: 2000, color: 'primary'});
     toast.present();

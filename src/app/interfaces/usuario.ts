@@ -1,3 +1,6 @@
+import { Pedido } from "./pedido";
+import { Produto } from "./produto";
+
 export interface Usuario {
     nome?: string;
     telefone?: number;
@@ -11,4 +14,6 @@ export interface Usuario {
     numero?: number;  
     complemento?: string;   
     produtosFavoritos?: string[];
+    carrinho?: Produto[];
+    pedido?: Pedido[];
 }

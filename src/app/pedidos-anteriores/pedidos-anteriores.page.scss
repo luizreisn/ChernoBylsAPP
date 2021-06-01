@@ -1,0 +1,45 @@
+.botaoVoltar{
+    position: absolute;
+    font-size: 20px;
+}
+
+.imgLogo{
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.texto{
+    font-size: 20pt;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.quantidadePedidos{
+    padding: 2%;
+    ion-text{
+      font-size: 15pt;
+      font-weight: bold;
+    }
+}
+
+ion-item{
+    color: var(--ion-color-primary);
+    .pedidoId{
+        font-size: 20pt;
+        font-weight: bolder;
+    }
+    .pedidoData{
+        font-size: 13pt;
+        margin-top: 0px;
+    }
+    .pedidoTotal{
+        font-size: 25pt;
+        font-weight: bolder;
+    }
+    .mlAuto{
+        margin-left: auto;
+    }
+}

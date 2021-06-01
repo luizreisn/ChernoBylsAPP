@@ -5,7 +5,7 @@
       <div class="imgLogo">
         <img src="/assets/img/logo.png">
       </div>
-      <ion-button slot="end" class="botaoCarrinho" [routerLink]="[]">
+      <ion-button slot="end" class="botaoCarrinho" [routerLink]="['/carrinho']">
         <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -17,7 +17,7 @@
 
 <ion-content>
   <div *ngFor="let categoria of menuEsp.categorias">
-      <h1>{{categoria.nome}}</h1>
+    <h1>{{categoria.nome}}</h1>
 
     <ion-list>
       <ion-item lines="full" *ngFor="let produto of filtrarProdutos(categoria.id)">
@@ -36,8 +36,8 @@
               <p>{{produto.valor | currency: 'BRL'}}</p>
             </ion-row>
             <ion-row>
-              <ion-button class="botaoFavorito" (click)="darFavorito(produto.id)" fill="clear" size="small" [color]="produtosFavoritos.includes(produto.id)? 'danger':'primary'" >
-                <ion-icon slot="icon-only" [name]="produtosFavoritos.includes(produto.id)? 'heart':'heart-outline'"></ion-icon>
+              <ion-button class="botaoFavorito" (click)="darFavorito(produto.id)" fill="clear" size="small" [color]="design(produto.id)?'danger':'primary'" >
+                <ion-icon slot="icon-only" [name]="design(produto.id)?'heart':'heart-outline'"></ion-icon>
               </ion-button>
             </ion-row>
             <ion-row>
@@ -47,5 +47,6 @@
         </ion-row>
       </ion-item>
     </ion-list>
+    
   </div>
 </ion-content>

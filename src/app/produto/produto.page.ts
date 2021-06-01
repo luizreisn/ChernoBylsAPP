@@ -16,10 +16,6 @@ export class ProdutoPage{
 
   public produtosFavoritos: string[];
 
-  public quantidade: number = 0;
-
-  public valorTotal: number = null;
-
   public produto: Produto = {};
   public produtoId: string = null;
   public produtoSubscription: Subscription;
@@ -70,32 +66,35 @@ export class ProdutoPage{
   }
 
   public retirar(){
-    if(this.quantidade <= 0){
+    if(this.produto.quantidade <= 0){
       return;
     }else{
-      this.quantidade--;
+      this.produto.quantidade--;
       this.atualizarValor();
     }
   }
 
   public adicionar(){
-    this.quantidade++;
+    this.produto.quantidade++;
     this.atualizarValor();
   }
 
   public atualizarValor(){
-    this.valorTotal = this.produto.valor * this.quantidade;
+    this.produto.valorTotal = this.produto.valor * this.produto.quantidade;
   }
 
-  public adicionarProd(){
-    console.log(this.valorTotal);
+  public async adicionarProd(){
+    this.usuario.carrinho.push(this.produto)
+    await this.authService.atualizarCarrinho(this.usuarioId, this.usuario.carrinho);
+    console.log(this.produto.valorTotal);
     console.log(this.usuario);
+    console.log(this.produto);
     this.resetarProduto();
-    this.navCtrl.navigateBack('/home');
+    this.navCtrl.navigateBack('/carrinho');
   }
 
   public resetarProduto(){
-    this.quantidade = 0;
+    this.produto.quantidade = 0;
     this.atualizarValor();
     console.log(this.produto.condimentos);
   }

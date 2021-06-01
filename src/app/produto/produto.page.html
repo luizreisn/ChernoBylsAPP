@@ -5,7 +5,7 @@
       <div class="imgLogo">
         <img src="/assets/img/logo.png">
       </div>
-      <ion-button slot="end" class="botaoCarrinho" [routerLink]="[]">
+      <ion-button slot="end" class="botaoCarrinho" [routerLink]="['/carrinho']">
         <ion-icon slot="icon-only" name="cart-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -49,13 +49,13 @@
       <ion-button fill="outline" (click)="retirar()">
         <ion-icon name="remove-outline"></ion-icon>
       </ion-button>
-      <ion-button [disabled]=true style="opacity: 100%;">{{quantidade}}</ion-button>
+      <ion-button [disabled]=true style="opacity: 100%;">{{produto.quantidade}}</ion-button>
       <ion-button fill="outline" (click)="adicionar()">
         <ion-icon name="add-outline"></ion-icon>
       </ion-button>
     </ion-col> 
     <ion-col size="6">
-      <ion-button [disabled]="quantidade <= 0" expand="block" (click)="adicionarProd()">Adicionar {{valorTotal | currency: 'BRL'}}</ion-button>
+      <ion-button [disabled]="produto.quantidade <= 0" expand="block" (click)="adicionarProd()">Adicionar {{produto.valorTotal | currency: 'BRL'}}</ion-button>
     </ion-col>
   </ion-row>
 

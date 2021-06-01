@@ -15,6 +15,8 @@ export class FavoritosPage {
 
   public produtosFavoritos: string[];
 
+  public quantidadeFavoritos: number;
+
   public usuario: Usuario = {};
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
@@ -34,6 +36,7 @@ export class FavoritosPage {
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
       this.produtosFavoritos = this.usuario.produtosFavoritos;
+      this.quantidadeFavoritos = this.produtosFavoritos.length;
     });
     this.produtosSubscription = this.produtosService.getProdutos().subscribe(data =>{
       this.produtos = data;
