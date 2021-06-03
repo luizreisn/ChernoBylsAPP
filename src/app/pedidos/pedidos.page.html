@@ -15,7 +15,14 @@
 <ion-content>
   <div *ngIf="pedido">
     <h1 class="produtoId">#{{pedido.id}}</h1>
-    <p class="realizado">Pedido realizado em: <br> {{pedido.data.toMillis() | date: 'dd/MM/yy'}} <br> {{pedido.data.toMillis() | date: 'h:mm a'}}</p>
+    <ion-row>
+      <ion-col>
+        <p class="realizado">Pedido realizado em: <br> {{pedido.data.toMillis() | date: 'dd/MM/yy'}} <br> {{pedido.data.toMillis() | date: 'h:mm a'}}</p>
+      </ion-col>
+      <ion-col>
+        <p class="realizado">Pedido entregue em: <br> {{pedido.endereco}} {{pedido.numero}}</p>
+      </ion-col>
+    </ion-row>
         <ion-list>
           <ion-item lines="full" *ngFor="let produto of pedido.produtos">
             <ion-row>
