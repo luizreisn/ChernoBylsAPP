@@ -26,7 +26,7 @@ export class MenusPage {
   public produtosFiltrados = this.produtos;
   private produtosSubscription: Subscription;
 
-  public usuario: Usuario = {};
+  public usuario: Usuario = null;
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 
@@ -76,14 +76,6 @@ export class MenusPage {
       console.log(this.produtosFavoritos)
       this.authService.atualizarFavorito(this.usuarioId, this.produtosFavoritos)
       this.toast('Produto colocado na lista de favoritos.')
-    }
-  }
-
-  public design(id: string){
-    if(this.usuario.produtosFavoritos.find(p => p === id)){
-      return true
-    }else{
-      return false
     }
   }
 

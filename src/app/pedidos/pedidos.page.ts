@@ -16,7 +16,7 @@ export class PedidosPage {
   public pedido: Pedido = null;
   public pedidoId: string = null;
 
-  public usuario: Usuario = null;
+  public usuario: Usuario = {};
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 

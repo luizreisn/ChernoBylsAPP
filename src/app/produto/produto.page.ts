@@ -20,7 +20,7 @@ export class ProdutoPage{
   public produtoId: string = null;
   public produtoSubscription: Subscription;
 
-  public usuario: Usuario = {};
+  public usuario: Usuario = null;
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 

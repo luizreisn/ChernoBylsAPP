@@ -17,7 +17,7 @@ export class FavoritosPage {
 
   public quantidadeFavoritos: number;
 
-  public usuario: Usuario = {};
+  public usuario: Usuario = null;
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 
