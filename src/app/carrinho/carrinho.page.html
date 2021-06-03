@@ -62,7 +62,7 @@
   <h4 class="valores">Frete: {{frete | currency: 'BRL'}}</h4>
   <h1 class="valores total">Total: {{total | currency: 'BRL'}}</h1>
 
-  <ion-button [disabled]="quantidadeCarrinho === 0" expand="block" class="confirmarPagamento" (click)="fazerPedido()">
+  <ion-button [disabled]="quantidadeCarrinho === 0 || (usuario.endereco === '' || usuario.numero === null)" expand="block" class="confirmarPagamento" (click)="fazerPedido()">
     Realizar Pedido
   </ion-button>
 </ion-footer>

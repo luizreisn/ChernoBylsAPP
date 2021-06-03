@@ -11,7 +11,7 @@ import firebase from "firebase/app"
   templateUrl: './carrinho.page.html',
   styleUrls: ['./carrinho.page.scss'],
 })
-export class CarrinhoPage{
+export class CarrinhoPage {
 
   public subtotal: number = 0;
   public frete: number = 5;
@@ -27,12 +27,12 @@ export class CarrinhoPage{
   public usuarioSubscription: Subscription;
 
   constructor(private authService: AuthService,
-              private navCtrl: NavController,) { 
+    private navCtrl: NavController,) {
     this.carregarDados();
   }
 
-  public async carregarDados(){
-    this.usuarioId = (await this.authService.getAuth().currentUser).uid 
+  public async carregarDados() {
+    this.usuarioId = (await this.authService.getAuth().currentUser).uid
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
       this.carrinho = this.usuario.carrinho;
@@ -42,33 +42,33 @@ export class CarrinhoPage{
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.usuarioSubscription.unsubscribe();
   }
 
-  public filtrar(produto: Produto){
+  public filtrar(produto: Produto) {
     const c = produto.condimentos.filter(c => c.marcado === true)
     return c;
   }
 
-  public excluirDoCarrinho(produto: Produto){
+  public excluirDoCarrinho(produto: Produto) {
     const index = this.carrinho.findIndex(p => p === produto)
     this.carrinho.splice(index, 1);
     this.authService.atualizarCarrinho(this.usuarioId, this.carrinho);
     this.atualizarValor()
   }
 
-  public atualizarValor(){
-    for(let produto of this.carrinho){
+  public atualizarValor() {
+    for (let produto of this.carrinho) {
       this.subtotal += produto.valorTotal
     }
     this.total = this.frete + this.subtotal;
   }
 
-  public fazerPedido(){
+  public fazerPedido() {
     this.id = 'pedido' + Math.max(this.usuario.pedido.length + 1)
     //this.usuario.pedido.push({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: new Date,id: this.id})
-    this.usuario.pedido.unshift({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: firebase.firestore.Timestamp.now(),id: this.id})
+    this.usuario.pedido.unshift({ produtos: this.carrinho, subtotal: this.subtotal, frete: this.frete, total: this.total, data: firebase.firestore.Timestamp.now(), id: this.id, endereco: this.usuario.endereco, numero: this.usuario.numero })
     this.usuario.carrinho = []
     this.authService.atualizarPedidos(this.usuarioId, this.usuario)
     this.authService.atualizarCarrinho(this.usuarioId, this.usuario.carrinho)
@@ -77,7 +77,7 @@ export class CarrinhoPage{
     console.log(this.usuario.pedido)
   }
 
-  public resetarValores(){
+  public resetarValores() {
     this.subtotal = 0;
     this.total = 0;
   }
