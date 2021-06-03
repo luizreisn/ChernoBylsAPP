@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Produto } from '../interfaces/produto';
 import { Usuario } from '../interfaces/usuario';
 import { AuthService } from '../services/auth.service';
+import firebase from "firebase/app"
 
 @Component({
   selector: 'app-carrinho',
@@ -67,7 +68,7 @@ export class CarrinhoPage{
   public fazerPedido(){
     this.id = 'pedido' + Math.max(this.usuario.pedido.length + 1)
     //this.usuario.pedido.push({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: new Date,id: this.id})
-    this.usuario.pedido.unshift({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: new Date(),id: this.id})
+    this.usuario.pedido.unshift({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: firebase.firestore.Timestamp.now(),id: this.id})
     this.usuario.carrinho = []
     this.authService.atualizarPedidos(this.usuarioId, this.usuario)
     this.authService.atualizarCarrinho(this.usuarioId, this.usuario.carrinho)

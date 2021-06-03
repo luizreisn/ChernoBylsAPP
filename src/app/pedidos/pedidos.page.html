@@ -13,41 +13,44 @@
 </ion-header>
 
 <ion-content>
-  <h1 class="produtoId">#{{pedido.id}}</h1>
-  <p class="realizado">Pedido realizado em: <br> {{pedido.data.toMillis() | date: 'dd/MM/yy'}} <br> {{pedido.data.toMillis() | date: 'h:mm a'}}</p>
-
-      <ion-list>
-        <ion-item lines="full" *ngFor="let produto of pedido.produtos">
-          <ion-row>
-            <ion-col size="83px" class="imagemProduto">
-              <ion-card class="ion-no-margin">
-                <img [src]="produto.imagem">
-              </ion-card>
-            </ion-col>
-            <ion-col>
-              <h2 class="nomeProduto">{{produto.nome}}</h2>
-            <p class="quantidadeProduto">{{produto.valor | currency: 'BRL'}} - {{produto.quantidade}}un</p>
-            <p class="descricaoProduto">{{produto.descricao | slice:0:25}} {{produto.descricao.length >= 25 ? '...' : ''}}</p>
-            <p class="ion-no-margin"><br></p>
-            <div *ngFor="let condimento of filtrar(produto)">
-              <p class="descricaoProduto">- {{condimento.nome}}</p>
-            </div>
-            </ion-col>
-            <ion-col size="60px">
-              <ion-row class="valorProduto">
-                <p>{{produto.valor | currency: 'BRL'}}</p>
-              </ion-row>
-              <ion-row>
-                <ion-button class="botaoVer" [routerLink]="['/produto', produto.id]" >Ver</ion-button>
-              </ion-row>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-      </ion-list>
+  <div *ngIf="pedido">
+    <h1 class="produtoId">#{{pedido.id}}</h1>
+    <p class="realizado">Pedido realizado em: <br> {{pedido.data.toMillis() | date: 'dd/MM/yy'}} <br> {{pedido.data.toMillis() | date: 'h:mm a'}}</p>
+        <ion-list>
+          <ion-item lines="full" *ngFor="let produto of pedido.produtos">
+            <ion-row>
+              <ion-col size="83px" class="imagemProduto">
+                <ion-card class="ion-no-margin">
+                  <img [src]="produto.imagem">
+                </ion-card>
+              </ion-col>
+              <ion-col>
+                <h2 class="nomeProduto">{{produto.nome}}</h2>
+              <p class="quantidadeProduto">{{produto.valor | currency: 'BRL'}} - {{produto.quantidade}}un</p>
+              <p class="descricaoProduto">{{produto.descricao | slice:0:25}} {{produto.descricao.length >= 25 ? '...' : ''}}</p>
+              <p class="ion-no-margin"><br></p>
+              <div *ngFor="let condimento of filtrar(produto)">
+                <p class="descricaoProduto">- {{condimento.nome}}</p>
+              </div>
+              </ion-col>
+              <ion-col size="60px">
+                <ion-row class="valorProduto">
+                  <p>{{produto.valor | currency: 'BRL'}}</p>
+                </ion-row>
+                <ion-row>
+                  <ion-button class="botaoVer" [routerLink]="['/produto', produto.id]" >Ver</ion-button>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-list>
+  </div>
 
 </ion-content>
 <ion-footer>
-  <h2 class="valores subtotal">Subtotal: {{pedido.subtotal | currency: 'BRL'}}</h2>
-  <h4 class="valores">Frete: {{pedido.frete | currency: 'BRL'}}</h4>
-  <h1 class="valores total">Total: {{pedido.total | currency: 'BRL'}}</h1>
+  <div *ngIf="pedido">
+    <h2 class="valores subtotal">Subtotal: {{pedido.subtotal | currency: 'BRL'}}</h2>
+    <h4 class="valores">Frete: {{pedido.frete | currency: 'BRL'}}</h4>
+    <h1 class="valores total">Total: {{pedido.total | currency: 'BRL'}}</h1>
+  </div>
 </ion-footer>

@@ -13,10 +13,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class PedidosPage {
 
-  public pedido: Pedido = {};
+  public pedido: Pedido = null;
   public pedidoId: string = null;
 
-  public usuario: Usuario = {};
+  public usuario: Usuario = null;
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 
@@ -30,9 +30,11 @@ export class PedidosPage {
     this.usuarioId = (await this.authService.getAuth().currentUser).uid 
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
-      this.usuario.pedido.map(p => p.data.toLocaleDateString)
+      //this.usuario.pedido.map(p => p.data.toDate().toLocaleString())
       this.pedido = this.usuario.pedido.find(p => p.id === this.pedidoId);
+      console.log(this.pedido)
     });
+    
   }
 
   ngOnDestroy(){
