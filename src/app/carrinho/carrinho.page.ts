@@ -12,9 +12,9 @@ import { AuthService } from '../services/auth.service';
 })
 export class CarrinhoPage{
 
-  public subtotal = 0;
-  public frete = 5;
-  public total = 0;
+  public subtotal: number = 0;
+  public frete: number = 5;
+  public total: number = 0;
   public id: string;
 
   public quantidadeCarrinho: number;
@@ -28,7 +28,6 @@ export class CarrinhoPage{
   constructor(private authService: AuthService,
               private navCtrl: NavController,) { 
     this.carregarDados();
-    this.atualizarValores();
   }
 
   public async carregarDados(){
@@ -36,9 +35,10 @@ export class CarrinhoPage{
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
       this.carrinho = this.usuario.carrinho;
-      this.quantidadeCarrinho = this.usuario.carrinho.length;
+      this.quantidadeCarrinho = this.carrinho.length;
+      this.resetarValores()
+      this.atualizarValor()
     });
-    this.atualizarValores();
   }
 
   ngOnDestroy(){
@@ -54,22 +54,31 @@ export class CarrinhoPage{
     const index = this.carrinho.findIndex(p => p === produto)
     this.carrinho.splice(index, 1);
     this.authService.atualizarCarrinho(this.usuarioId, this.carrinho);
-    this.atualizarValores();
+    this.atualizarValor()
   }
 
-  public atualizarValores(){
+  public atualizarValor(){
+    for(let produto of this.carrinho){
+      this.subtotal += produto.valorTotal
+    }
+    this.total = this.frete + this.subtotal;
   }
 
   public fazerPedido(){
     this.id = 'pedido' + Math.max(this.usuario.pedido.length + 1)
-    this.usuario.pedido.push({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: new Date,id: this.id})
+    //this.usuario.pedido.push({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: new Date,id: this.id})
+    this.usuario.pedido.unshift({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: new Date(),id: this.id})
     this.usuario.carrinho = []
     this.authService.atualizarPedidos(this.usuarioId, this.usuario)
     this.authService.atualizarCarrinho(this.usuarioId, this.usuario.carrinho)
-    this.subtotal = 0;
-    this.total = 0;
+    this.resetarValores();
     this.navCtrl.navigateBack('/home');
     console.log(this.usuario.pedido)
+  }
+
+  public resetarValores(){
+    this.subtotal = 0;
+    this.total = 0;
   }
 
 }

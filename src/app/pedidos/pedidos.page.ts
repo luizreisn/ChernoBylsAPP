@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Timestamp } from 'rxjs/internal/operators/timestamp';
 import { Pedido } from '../interfaces/pedido';
+import { Produto } from '../interfaces/produto';
 import { Usuario } from '../interfaces/usuario';
 import { AuthService } from '../services/auth.service';
 
@@ -39,8 +39,10 @@ export class PedidosPage {
     this.usuarioSubscription.unsubscribe();
   }
 
-  public millis(data: Date){
-
+  public filtrar(produto: Produto){
+    const c = produto.condimentos.filter(c => c.marcado === true)
+    return c;
   }
+
 
 }

@@ -23,7 +23,7 @@ export class HomePage {
 
   public produtos = new Array<Produto>();
   private produtosSubscription: Subscription;
-  public produtosFiltrados = this.produtos;
+  public produtosFiltrados: Array<Produto>;
 
   public botoesMenu = new Array<BotoesMenu>();
   private botoesMenuSubscription: Subscription;
@@ -60,6 +60,7 @@ export class HomePage {
     });
     this.produtosSubscription = this.produtoService.getProdutos().subscribe(data =>{
       this.produtos = data;
+      this.produtosFiltrados = this.produtos;
     });
     this.botoesMenuSubscription = this.botoesMenuService.getBotoesMenu().subscribe(data => {
       this.botoesMenu = data;

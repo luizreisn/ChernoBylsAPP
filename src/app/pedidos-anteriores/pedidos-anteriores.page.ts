@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Pedido } from '../interfaces/pedido';
 import { Usuario } from '../interfaces/usuario';
 import { AuthService } from '../services/auth.service';
 
@@ -11,6 +12,7 @@ import { AuthService } from '../services/auth.service';
 export class PedidosAnterioresPage {
 
   public quantidadePedidos: number;
+  public data: Pedido[];
 
   public usuario: Usuario = {};
   public usuarioId: string = null;
