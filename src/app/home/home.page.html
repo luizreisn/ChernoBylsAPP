@@ -61,7 +61,7 @@
 
 <ng-template #focarPesquisa>
   <ion-content>
-    <ion-list >
+    <ion-list>
       <ion-item lines="full" [routerLink]="['/produto', produto.id]" *ngFor="let produto of produtosFiltrados">
         <ion-label color="primary" class="listaBusca">
           <ion-text>{{produto.nome}}</ion-text>

@@ -80,8 +80,8 @@ export class HomePage {
     this.avisosSubscription.unsubscribe();
   }
 
-  public busca(ev: CustomEvent){
-    let val= ev.detail.value;
+  public busca(ev: Event){
+    let val= (ev as CustomEvent).detail.value;
     if(val && val.trim() !== ''){
       this.produtosFiltrados = this.produtos.filter(termo =>
         termo.nome.toLocaleLowerCase().indexOf(val.toLocaleLowerCase().trim()) > -1)
