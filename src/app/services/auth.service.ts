@@ -4,6 +4,7 @@ import { Usuario } from '../interfaces/usuario';
 import { switchMap } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Produto } from '../interfaces/produto';
+import { DadoEndereco } from '../interfaces/dado-endereco';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class AuthService {
 
   public atualizarUsuario(id: string, usuario: Usuario){
     return this.usuariosColecao.doc<Usuario>(id).update(usuario);
+  }
+
+  public atualizarEndereco(id: string, endereco: DadoEndereco){
+    return this.usuariosColecao.doc<Usuario>(id).update({dadosEndereco: endereco})
   }
 
   public atualizarFavorito(id: string, produtosFav: string[]){
