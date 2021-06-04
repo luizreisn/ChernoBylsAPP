@@ -11,7 +11,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class EnderecoPage {
 
-  public usuario: Usuario = {};
+  public usuario: Usuario = null;
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 
@@ -34,7 +34,7 @@ export class EnderecoPage {
   public async atualizarEndereco(){
     await this.carregando();
     try{
-      this.authService.atualizarUsuario(this.usuarioId, this.usuario);
+      this.authService.atualizarEndereco(this.usuarioId, this.usuario.dadosEndereco);
       await this.loading.dismiss();
       this.toast('Endereço atualizado com sucesso!');
       this.nav.back();

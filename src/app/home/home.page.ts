@@ -17,7 +17,7 @@ import { ProdutoService } from '../services/produto.service';
 })
 export class HomePage {
 
-  public usuario: Usuario = {};
+  public usuario: Usuario = null;
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 
@@ -55,8 +55,8 @@ export class HomePage {
     this.usuarioId = (await this.authService.getAuth().currentUser).uid
     this.usuarioSubscription = this.authService.getUsuario(this.usuarioId).subscribe(data => {
       this.usuario = data;
-      this.usuario.endereco = data.endereco;
-      this.usuario.numero = data.numero;
+      this.usuario.dadosEndereco.endereco = data.dadosEndereco.endereco;
+      this.usuario.dadosEndereco.numero = data.dadosEndereco.numero;
     });
     this.produtosSubscription = this.produtoService.getProdutos().subscribe(data =>{
       this.produtos = data;

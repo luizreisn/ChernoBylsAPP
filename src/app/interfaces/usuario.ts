@@ -1,3 +1,4 @@
+import { DadoEndereco } from "./dado-endereco";
 import { Pedido } from "./pedido";
 import { Produto } from "./produto";
 
@@ -9,10 +10,7 @@ export interface Usuario {
     sexo?: string;
     email?: string;
     senha?: string;        
-    cep?: number;
-    endereco?: string;
-    numero?: number;  
-    complemento?: string;   
+    dadosEndereco?: DadoEndereco;  
     produtosFavoritos?: string[];
     carrinho?: Produto[];
     pedido?: Pedido[];

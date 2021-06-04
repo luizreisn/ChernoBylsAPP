@@ -13,58 +13,58 @@
 </ion-header>
 
 <ion-content>
-  <ion-card color="primary" class="ion-text-center quantidadeProdutos">
-    <ion-text>Existem {{quantidadeCarrinho}} produtos no seu carrinho</ion-text>
-  </ion-card>
-
-  <ion-list *ngIf="quantidadeCarrinho > 0; else carrinhoVazio">
-    <ion-item-sliding *ngFor="let produto of carrinho">
-      <ion-item lines="full">
-        <ion-row>
-          <ion-col size="83px" class="imagemProduto">
-            <ion-card class="ion-no-margin">
-              <img [src]="produto.imagem">
-            </ion-card>
-          </ion-col>
-          <ion-col>
-            <h2 class="nomeProduto">{{produto.nome}}</h2>
-            <p class="quantidadeProduto">{{produto.valor | currency: 'BRL'}} - {{produto.quantidade}}un</p>
-            <p class="descricaoProduto">{{produto.descricao | slice:0:25}} {{produto.descricao.length >= 25 ? '...' : ''}}</p>
-            <p class="ion-no-margin"><br></p>
-            <div *ngFor="let condimento of filtrar(produto)">
-              <p class="descricaoProduto">- {{condimento.nome}}</p>
-            </div>
-          </ion-col>
-          <ion-col size="60px">
-            <ion-row class="valorProduto">
-              <p>{{produto.valorTotal | currency: 'BRL'}}</p>
-            </ion-row>
-            <ion-row>
-              <ion-button class="botaoExcluir" [routerLink]="['/produto', produto.id]">
-                Ver
-              </ion-button>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item-options side="end">
-        <ion-item-option color="danger" (click)="excluirDoCarrinho(produto)">
-          <ion-icon slot="top" name="trash"></ion-icon>
-          Excluir
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+    <ion-card color="primary" class="ion-text-center quantidadeProdutos">
+      <ion-text>Existem {{quantidadeCarrinho}} produtos no seu carrinho</ion-text>
+    </ion-card>
+    <ion-list *ngIf="quantidadeCarrinho > 0; else carrinhoVazio">
+      <ion-item-sliding *ngFor="let produto of carrinho">
+        <ion-item lines="full">
+          <ion-row>
+            <ion-col size="83px" class="imagemProduto">
+              <ion-card class="ion-no-margin">
+                <img [src]="produto.imagem">
+              </ion-card>
+            </ion-col>
+            <ion-col>
+              <h2 class="nomeProduto">{{produto.nome}}</h2>
+              <p class="quantidadeProduto">{{produto.valor | currency: 'BRL'}} - {{produto.quantidade}}un</p>
+              <p class="descricaoProduto">{{produto.descricao | slice:0:25}} {{produto.descricao.length >= 25 ? '...' : ''}}</p>
+              <p class="ion-no-margin"><br></p>
+              <div *ngFor="let condimento of filtrar(produto)">
+                <p class="descricaoProduto">- {{condimento.nome}}</p>
+              </div>
+            </ion-col>
+            <ion-col size="60px">
+              <ion-row class="valorProduto">
+                <p>{{produto.valorTotal | currency: 'BRL'}}</p>
+              </ion-row>
+              <ion-row>
+                <ion-button class="botaoExcluir" [routerLink]="['/produto', produto.id]">
+                  Ver
+                </ion-button>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="excluirDoCarrinho(produto)">
+            <ion-icon slot="top" name="trash"></ion-icon>
+            Excluir
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 </ion-content>
 
 <ion-footer>
-  <h2 class="valores subtotal">Subtotal: {{subtotal | currency: 'BRL'}}</h2>
-  <h4 class="valores">Frete: {{frete | currency: 'BRL'}}</h4>
-  <h1 class="valores total">Total: {{total | currency: 'BRL'}}</h1>
-
-  <ion-button [disabled]="quantidadeCarrinho === 0 || (usuario.endereco === '' || usuario.numero === null)" expand="block" class="confirmarPagamento" (click)="fazerPedido()">
-    Realizar Pedido
-  </ion-button>
+    <div *ngIf="usuario">
+      <h2 class="valores subtotal">Subtotal: {{subtotal | currency: 'BRL'}}</h2>
+      <h4 class="valores">Frete: {{frete | currency: 'BRL'}}</h4>
+      <h1 class="valores total">Total: {{total | currency: 'BRL'}}</h1>
+      <ion-button [disabled]="quantidadeCarrinho === 0 || (usuario.dadosEndereco.endereco === '' || usuario.dadosEndereco.numero === null)" expand="block" class="confirmarPagamento" (click)="fazerPedido()">
+        Realizar Pedido
+      </ion-button>
+    </div>
 </ion-footer>
 
 <ng-template #carrinhoVazio>

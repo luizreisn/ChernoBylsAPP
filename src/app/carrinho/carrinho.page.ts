@@ -22,7 +22,7 @@ export class CarrinhoPage {
 
   public carrinho: Produto[];
 
-  public usuario: Usuario = {};
+  public usuario: Usuario = null;
   public usuarioId: string = null;
   public usuarioSubscription: Subscription;
 
@@ -68,7 +68,7 @@ export class CarrinhoPage {
   public fazerPedido() {
     this.id = 'pedido' + Math.max(this.usuario.pedido.length + 1)
     //this.usuario.pedido.push({produtos: this.carrinho,subtotal: this.subtotal,frete: this.frete,total: this.total,data: new Date,id: this.id})
-    this.usuario.pedido.unshift({ produtos: this.carrinho, subtotal: this.subtotal, frete: this.frete, total: this.total, data: firebase.firestore.Timestamp.now(), id: this.id, endereco: this.usuario.endereco, numero: this.usuario.numero })
+    this.usuario.pedido.unshift({ produtos: this.carrinho, subtotal: this.subtotal, frete: this.frete, total: this.total, data: firebase.firestore.Timestamp.now(), id: this.id, endereco: this.usuario.dadosEndereco.endereco, numero: this.usuario.dadosEndereco.numero })
     this.usuario.carrinho = []
     this.authService.atualizarPedidos(this.usuarioId, this.usuario)
     this.authService.atualizarCarrinho(this.usuarioId, this.usuario.carrinho)

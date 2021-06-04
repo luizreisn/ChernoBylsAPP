@@ -13,23 +13,21 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="trocaEndereco">
-    <ion-item lines='none'>
-      <ion-input type="number" placeholder="CEP" [(ngModel)]="usuario.cep"></ion-input>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-input type="text" placeholder="Endereço" [(ngModel)]="usuario.endereco"></ion-input>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-input type="number" placeholder="Numero" [(ngModel)]="usuario.numero"></ion-input>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-textarea placeholder="Complemento" [(ngModel)]="usuario.complemento"></ion-textarea>
-    </ion-item>
-
-    <ion-button class="botaoConfirma"expand="block" (click)="atualizarEndereco()">Confirmar Endereço</ion-button>
-  </ion-card>
+  <div *ngIf="usuario">
+    <ion-card class="trocaEndereco">
+      <ion-item lines='none'>
+        <ion-input type="number" placeholder="CEP" [(ngModel)]="usuario.dadosEndereco.cep"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input type="text" placeholder="Endereço" [(ngModel)]="usuario.dadosEndereco.endereco"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input type="number" placeholder="Numero" [(ngModel)]="usuario.dadosEndereco.numero"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-textarea placeholder="Complemento" [(ngModel)]="usuario.dadosEndereco.complemento"></ion-textarea>
+      </ion-item>
+      <ion-button class="botaoConfirma"expand="block" (click)="atualizarEndereco()">Confirmar Endereço</ion-button>
+    </ion-card>
+  </div>
 </ion-content>
